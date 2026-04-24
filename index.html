@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#20614D">
+<title>Pâte Pizza Napolitaine</title>
+
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    /* Couleurs Greenweez */
+    --green-800: #20614D;      /* vert institutionnel */
+    --green-700: #287960;
+    --green-200: #A9E3D1;
+    --green-50:  #EAF8F4;
+    --pop-conifer: #CCFF6C;    /* vert pop d'accent */
+    --brown-100: #FAEAD5;      /* fond beige chaud */
+    --white: #FFFFFF;
+    --gray-800: #262422;       /* texte principal */
+    --gray-600: #5F5B56;
+    --gray-400: #B8B3AC;
+    --gray-200: #E6E3DE;
+    --gray-50:  #FAF9F7;
+    --secondary-700: #C0510A;  /* accent chaud */
+    --red-accent: #D5372B;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    background: var(--brown-100);
+    color: var(--gray-800);
+    font-family: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 400;
+    min-height: 100vh;
+    overflow-x: hidden;
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    line-height: 1.5;
+  }
+
+  h1, h2, h3, .display, .badge, .step-title {
+    font-family: 'Poppins', sans-serif;
+  }
+
+  /* --- HERO --- */
+  .hero {
+    background: var(--green-800);
+    padding: 40px 20px 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Forme organique Greenweez en arrière-plan */
+  .hero svg.organic {
+    position: absolute;
+    top: -40px; right: -80px;
+    width: 360px; height: 360px;
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  .hero-inner { position: relative; z-index: 1; }
+
+  .logo-icon {
+    width: 88px; height: 88px;
+    margin: 0 auto 16px;
+    border-radius: 22px;
+    background: var(--pop-conifer);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  }
+
+  .logo-icon svg { width: 68px; height: 68px; }
+
+  .hero h1 {
+    font-size: 30px;
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--white);
+    letter-spacing: -0.5px;
+  }
+
+  .hero h1 span { color: var(--pop-conifer); }
+
+  .subtitle {
+    margin-top: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--pop-conifer);
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .badge-row {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 22px;
+    flex-wrap: wrap;
+  }
+
+  .badge {
+    background: var(--pop-conifer);
+    color: var(--green-800);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+  }
+
+  /* --- CONTAINER (pulled up over hero) --- */
+  .container {
+    padding: 0 16px 32px;
+    max-width: 480px;
+    margin: -50px auto 0;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* --- CARDS --- */
+  .card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 22px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 12px rgba(38,36,34,0.06);
+  }
+
+  .section-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--green-800);
+    margin-bottom: 4px;
+  }
+
+  .section-sub {
+    font-size: 13px;
+    color: var(--gray-600);
+    margin-bottom: 16px;
+  }
+
+  /* --- SLIDER --- */
+  .slider-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 12px;
+  }
+
+  .slider-row input[type=range] {
+    -webkit-appearance: none;
+    flex: 1;
+    height: 6px;
+    background: var(--gray-200);
+    border-radius: 999px;
+    outline: none;
+  }
+
+  .slider-row input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 26px; height: 26px;
+    background: var(--pop-conifer);
+    border: 3px solid var(--green-800);
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .slider-row input[type=range]::-moz-range-thumb {
+    width: 26px; height: 26px;
+    background: var(--pop-conifer);
+    border: 3px solid var(--green-800);
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .patons-val {
+    font-family: 'Poppins', sans-serif;
+    font-size: 34px;
+    font-weight: 800;
+    color: var(--green-800);
+    min-width: 44px;
+    text-align: center;
+  }
+
+  .hint {
+    font-size: 12px;
+    color: var(--gray-600);
+    margin-top: 10px;
+    text-align: right;
+  }
+
+  /* --- RECAP --- */
+  .recap-card {
+    background: var(--pop-conifer);
+    border-radius: 20px;
+    padding: 22px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .recap-card .section-title { color: var(--green-800); }
+
+  .recap-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 14px;
+  }
+
+  .recap-item {
+    background: rgba(255,255,255,0.5);
+    border-radius: 14px;
+    padding: 12px;
+    text-align: center;
+  }
+
+  .recap-item .val {
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--green-800);
+    line-height: 1.1;
+  }
+
+  .recap-item .lbl {
+    font-size: 10.5px;
+    color: var(--green-800);
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin-top: 4px;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  /* --- TIMELINE --- */
+  .timeline {
+    position: relative;
+    padding-left: 26px;
+    margin-top: 8px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 9px; top: 8px; bottom: 8px;
+    width: 2px;
+    background: var(--green-200);
+    border-radius: 2px;
+  }
+
+  .day-block { margin-bottom: 24px; }
+
+  .day-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--green-800);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    position: relative;
+    padding-top: 4px;
+  }
+
+  .day-label::before {
+    content: '';
+    position: absolute;
+    left: -21px; top: 50%; transform: translateY(-50%);
+    width: 12px; height: 12px;
+    background: var(--pop-conifer);
+    border: 2px solid var(--green-800);
+    border-radius: 50%;
+  }
+
+  .step-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 8px rgba(38,36,34,0.05);
+    transition: box-shadow 0.2s;
+  }
+
+  .step-card:active { box-shadow: 0 1px 4px rgba(38,36,34,0.1); }
+
+  .step-num {
+    width: 30px; height: 30px;
+    background: var(--green-800);
+    color: var(--pop-conifer);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+
+  .step-title {
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--gray-800);
+    line-height: 1.3;
+  }
+
+  .step-time {
+    font-size: 10.5px;
+    color: var(--green-800);
+    background: var(--green-50);
+    border-radius: 999px;
+    padding: 3px 10px;
+    white-space: nowrap;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .collapsible-toggle {
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-align: left;
+    color: inherit;
+    font-family: inherit;
+    flex-wrap: wrap;
+  }
+
+  .collapsible-toggle .step-title { flex: 1; min-width: 0; }
+
+  .arrow {
+    color: var(--green-800);
+    font-size: 12px;
+    transition: transform 0.3s;
+    flex-shrink: 0;
+    width: 16px;
+    text-align: center;
+  }
+
+  .arrow.open { transform: rotate(90deg); }
+
+  .collapsible-content {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.4s ease;
+  }
+
+  .collapsible-content.open { max-height: 900px; }
+
+  .ingredients-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 14px;
+    background: var(--gray-50);
+    border-radius: 12px;
+    padding: 12px 14px;
+  }
+
+  .ingredients-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 13.5px;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--gray-200);
+  }
+
+  .ingredients-list li:last-child { border-bottom: none; }
+
+  .ing-name { color: var(--gray-800); }
+  .ing-qty { font-weight: 700; color: var(--green-800); font-size: 14px; font-family: 'Poppins', sans-serif; }
+
+  .step-desc {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--gray-800);
+    margin-top: 10px;
+  }
+
+  .step-desc strong { color: var(--green-800); font-weight: 700; }
+
+  .tip-box {
+    background: var(--green-50);
+    border-left: 3px solid var(--pop-conifer);
+    border-radius: 0 12px 12px 0;
+    padding: 10px 14px;
+    font-size: 12.5px;
+    color: var(--gray-800);
+    margin-top: 10px;
+    line-height: 1.55;
+  }
+
+  .tip-box strong {
+    color: var(--green-800);
+    display: block;
+    margin-bottom: 4px;
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+  }
+
+  /* --- DIVIDER --- */
+  .divider {
+    height: 1px;
+    background: var(--green-200);
+    margin: 24px 4px;
+    border: none;
+  }
+
+  /* --- TOTAL RECAP --- */
+  .total-card {
+    background: var(--green-800);
+    color: var(--white);
+    border-radius: 20px;
+    padding: 22px;
+    margin-bottom: 20px;
+  }
+
+  .total-card .section-title { color: var(--white); }
+  .total-card .section-sub { color: var(--green-200); }
+
+  .total-card .ingredients-list {
+    background: rgba(255,255,255,0.08);
+  }
+
+  .total-card .ingredients-list li {
+    border-bottom-color: rgba(255,255,255,0.12);
+  }
+
+  .total-card .ing-name { color: var(--green-200); }
+  .total-card .ing-qty { color: var(--pop-conifer); }
+
+  .total-card .tip-box {
+    background: rgba(255,255,255,0.08);
+    border-left-color: var(--pop-conifer);
+    color: var(--white);
+  }
+
+  .total-card .tip-box strong { color: var(--pop-conifer); }
+
+  /* --- FOOTER --- */
+  .footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 11px;
+    color: var(--gray-600);
+    line-height: 1.6;
+  }
+
+  .footer .bee {
+    display: inline-block;
+    width: 28px; height: 28px;
+    background: var(--pop-conifer);
+    border-radius: 50%;
+    line-height: 28px;
+    margin-bottom: 8px;
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card, .step-card { animation: fadeInUp 0.4s ease both; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <!-- Forme organique Greenweez -->
+  <svg class="organic" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <path d="M 40 80 Q 20 40 60 30 Q 100 20 120 50 Q 140 80 110 100 Q 80 120 90 150 Q 100 180 140 170 Q 180 160 170 120" 
+          stroke="#CCFF6C" stroke-width="28" fill="none" stroke-linecap="round"/>
+  </svg>
+
+  <div class="hero-inner">
+    <div class="logo-icon">
+      <!-- Part de pizza SVG -->
+      <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 96 140 Q 256 100 416 140 L 280 440 Q 256 460 232 440 Z"
+              fill="#FAEAD5" stroke="#20614D" stroke-width="16" stroke-linejoin="round"/>
+        <path d="M 130 155 Q 256 125 382 155 L 272 400 Q 256 415 240 400 Z" fill="#20614D"/>
+        <ellipse cx="190" cy="195" rx="22" ry="18" fill="#FAEAD5"/>
+        <ellipse cx="270" cy="180" rx="20" ry="16" fill="#FAEAD5"/>
+        <ellipse cx="330" cy="200" rx="18" ry="15" fill="#FAEAD5"/>
+        <ellipse cx="220" cy="255" rx="24" ry="19" fill="#FAEAD5"/>
+        <ellipse cx="295" cy="265" rx="20" ry="16" fill="#FAEAD5"/>
+        <ellipse cx="250" cy="325" rx="22" ry="17" fill="#FAEAD5"/>
+        <ellipse cx="260" cy="380" rx="14" ry="11" fill="#FAEAD5"/>
+        <ellipse cx="230" cy="220" rx="8" ry="14" fill="#CCFF6C" transform="rotate(-25 230 220)"/>
+        <ellipse cx="305" cy="235" rx="7" ry="12" fill="#CCFF6C" transform="rotate(35 305 235)"/>
+        <ellipse cx="270" cy="300" rx="7" ry="12" fill="#CCFF6C" transform="rotate(-15 270 300)"/>
+      </svg>
+    </div>
+    <h1>Pâte <span>Napolitaine</span><br>Contemporaine</h1>
+    <p class="subtitle">Méthode Biga · Fermentation lente</p>
+    <div class="badge-row">
+      <span class="badge">75% Biga</span>
+      <span class="badge">70% Hydratation</span>
+      <span class="badge">Style Pro</span>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- SELECTOR -->
+  <div class="card">
+    <div class="section-title">Nombre de pâtons</div>
+    <div class="section-sub">Ajustez les quantités selon votre production</div>
+    <div class="slider-row">
+      <input type="range" id="patonSlider" min="1" max="24" value="6" step="1" oninput="updateRecipe(this.value)">
+      <div class="patons-val" id="patonVal">6</div>
+    </div>
+    <p class="hint">Pâtons de 280g chacun</p>
+  </div>
+
+  <!-- RECAP -->
+  <div class="recap-card">
+    <div class="section-title">Récapitulatif</div>
+    <div class="recap-grid">
+      <div class="recap-item"><div class="val" id="rFarine">1000g</div><div class="lbl">Farine totale</div></div>
+      <div class="recap-item"><div class="val" id="rPoids">1680g</div><div class="lbl">Poids total</div></div>
+      <div class="recap-item"><div class="val" id="rPaizze">6</div><div class="lbl">Pizzas</div></div>
+      <div class="recap-item"><div class="val">280g</div><div class="lbl">Par pâton</div></div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div style="padding: 0 4px 16px;">
+    <div class="section-title">Protocole étape par étape</div>
+    <div class="section-sub">Sur 2 jours · Méthode professionnelle</div>
+  </div>
+
+  <div class="timeline">
+
+    <!-- JOUR 1 -->
+    <div class="day-block">
+      <div class="day-label">Jour 1 — La Biga</div>
+
+      <div class="step-card">
+        <button class="collapsible-toggle" onclick="toggle(this)">
+          <div class="step-num">1</div>
+          <div class="step-title">Préparer la Biga (pré-ferment)</div>
+          <span class="step-time">30 min + 18h</span>
+          <span class="arrow">▶</span>
+        </button>
+        <div class="collapsible-content">
+          <ul class="ingredients-list">
+            <li><span class="ing-name">Farine (T00 ou W300+)</span><span class="ing-qty"><span id="bigaFarine">750</span>g</span></li>
+            <li><span class="ing-name">Eau froide (≈18°C)</span><span class="ing-qty"><span id="bigaEau">338</span>g</span></li>
+            <li><span class="ing-name">Levure fraîche</span><span class="ing-qty"><span id="bigaLevure">0.75</span>g</span></li>
+          </ul>
+          <p class="step-desc">Mélangez la farine, l'eau froide et la levure sans trop pétrir — la Biga doit rester grumeleuse, pas lisse. C'est normal !</p>
+          <div class="tip-box">
+            <strong>Conseil</strong>
+            La Biga doit juste être amalgamée. Une texture grossière est signe de réussite. L'eau doit être froide pour ralentir la fermentation.
+          </div>
+          <p class="step-desc">Couvrez d'un film alimentaire et laissez fermenter à température ambiante (16–18°C idéalement) pendant <strong>16 à 18 heures</strong>.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- JOUR 2 -->
+    <div class="day-block">
+      <div class="day-label">Jour 2 — Rafraîchi & Boulage</div>
+
+      <div class="step-card">
+        <button class="collapsible-toggle" onclick="toggle(this)">
+          <div class="step-num">2</div>
+          <div class="step-title">Préparer le rafraîchi</div>
+          <span class="step-time">15 min</span>
+          <span class="arrow">▶</span>
+        </button>
+        <div class="collapsible-content">
+          <ul class="ingredients-list">
+            <li><span class="ing-name">Farine restante (T00)</span><span class="ing-qty"><span id="rafFarine">250</span>g</span></li>
+            <li><span class="ing-name">Eau tiède (24–26°C)</span><span class="ing-qty"><span id="rafEau">362</span>g</span></li>
+            <li><span class="ing-name">Sel fin</span><span class="ing-qty"><span id="rafSel">25</span>g</span></li>
+            <li><span class="ing-name">Huile d'olive (optionnel)</span><span class="ing-qty"><span id="rafHuile">20</span>g</span></li>
+          </ul>
+          <p class="step-desc">Diluez la Biga fermentée dans l'eau tiède en déchirant des morceaux. Mélangez jusqu'à dissolution partielle. Ajoutez la farine restante et le sel.</p>
+          <div class="tip-box">
+            <strong>Attention</strong>
+            N'ajoutez jamais le sel directement sur la levure. Incorporez le sel après avoir commencé à mélanger la farine.
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <button class="collapsible-toggle" onclick="toggle(this)">
+          <div class="step-num">3</div>
+          <div class="step-title">Pétrissage</div>
+          <span class="step-time">15–20 min</span>
+          <span class="arrow">▶</span>
+        </button>
+        <div class="collapsible-content">
+          <p class="step-desc">Pétrissez énergiquement à la main ou au robot (crochet) pendant 15 à 20 min jusqu'à obtenir une pâte <strong>lisse, élastique et non collante</strong>.</p>
+          <p class="step-desc">Test du voile : étirez doucement un morceau entre vos doigts. Si la pâte s'étire sans se déchirer et laisse passer la lumière, c'est parfait.</p>
+          <div class="tip-box">
+            <strong>Technique</strong>
+            À la main : utilisez la technique du "slap & fold" — claquez la pâte sur le plan de travail, repliez-la sur elle-même, tournez de 90° et recommencez.
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <button class="collapsible-toggle" onclick="toggle(this)">
+          <div class="step-num">4</div>
+          <div class="step-title">Pointage (1ère pousse)</div>
+          <span class="step-time">1h à T°A</span>
+          <span class="arrow">▶</span>
+        </button>
+        <div class="collapsible-content">
+          <p class="step-desc">Formez une boule, placez dans un saladier légèrement huilé. Couvrez d'un film étirable. Laissez reposer <strong>1 heure à température ambiante</strong>.</p>
+          <div class="tip-box">
+            <strong>Conseil</strong>
+            La pâte doit doubler de volume. Si votre cuisine est fraîche, prolongez légèrement.
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <button class="collapsible-toggle" onclick="toggle(this)">
+          <div class="step-num">5</div>
+          <div class="step-title">Boulage & Appretto (2ème pousse)</div>
+          <span class="step-time">4–6h ou 24h frigo</span>
+          <span class="arrow">▶</span>
+        </button>
+        <div class="collapsible-content">
+          <p class="step-desc">Divisez la pâte en pâtons de <strong>280g</strong>. Boulez chaque pâton en une sphère tendue : rabattez les bords vers le dessous et faites pivoter sur le plan de travail pour créer de la tension.</p>
+          <p class="step-desc">Placez les pâtons dans des boîtes de fermentation légèrement huilées, espacés. Fermeture hermétique.</p>
+          <div class="tip-box">
+            <strong>Options</strong>
+            • Tempéré : 4 à 6h à température ambiante avant utilisation<br>
+            • Froid : 24h au réfrigérateur (meilleure saveur), puis 2h à T°A avant d'étaler
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CUISSON -->
+    <div class="day-block">
+      <div class="day-label">Cuisson — Le moment de vérité</div>
+
+      <div class="step-card">
+        <button class="collapsible-toggle" onclick="toggle(this)">
+          <div class="step-num">6</div>
+          <div class="step-title">Étaler & Garnir</div>
+          <span class="step-time">5 min / pizza</span>
+          <span class="arrow">▶</span>
+        </button>
+        <div class="collapsible-content">
+          <p class="step-desc"><strong>Jamais de rouleau !</strong> Étalez à la main sur plan fariné : pressez doucement du centre vers les bords pour chasser l'air. Soulevez et étirez délicatement par gravité.</p>
+          <div class="tip-box">
+            <strong>Le bord</strong>
+            Laissez 2–3 cm de bord (cornicione) sans appuyer — l'air piégé lui donnera ce gonflement caractéristique napolitain.
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <button class="collapsible-toggle" onclick="toggle(this)">
+          <div class="step-num">7</div>
+          <div class="step-title">Cuisson</div>
+          <span class="step-time">60–90s / 6–8 min</span>
+          <span class="arrow">▶</span>
+        </button>
+        <div class="collapsible-content">
+          <p class="step-desc"><strong>Four à pizza :</strong> 450–500°C, 60 à 90 secondes. Tournez la pizza à mi-cuisson.</p>
+          <p class="step-desc"><strong>Four domestique :</strong> Préchauffez au maximum (250–280°C) avec une pierre à pizza ou une plaque retournée. Cuisson 6 à 8 min.</p>
+          <div class="tip-box">
+            <strong>Pro tip</strong>
+            Préchauffez votre pierre au moins 45 min. Une plaque en acier (baking steel) donne d'excellents résultats à la maison.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- TOTAL RECAP -->
+  <div class="total-card">
+    <div class="section-title">Total ingrédients</div>
+    <div class="section-sub">Pour <span id="recap_patons">6</span> pâtons</div>
+    <ul class="ingredients-list">
+      <li><span class="ing-name">Farine totale (T00 / W300)</span><span class="ing-qty"><span id="tot_farine">1000</span>g</span></li>
+      <li><span class="ing-name">Eau totale</span><span class="ing-qty"><span id="tot_eau">700</span>g</span></li>
+      <li><span class="ing-name">Levure fraîche</span><span class="ing-qty"><span id="tot_levure">0.75</span>g</span></li>
+      <li><span class="ing-name">Sel fin</span><span class="ing-qty"><span id="tot_sel">25</span>g</span></li>
+      <li><span class="ing-name">Huile d'olive</span><span class="ing-qty"><span id="tot_huile">20</span>g</span></li>
+    </ul>
+    <div class="tip-box">
+      <strong>Ratios de référence (pour 1kg farine)</strong>
+      Hydratation 70% · Biga 75% · Sel 2.5% · Levure 0.075%
+    </div>
+  </div>
+
+  <div class="footer">
+    Recette issue de la vidéo YouTube<br>
+    « Pâte à Pizza Pro — Style Napolitaine Contemporaine »<br>
+    <span style="color:var(--gray-400)">Application hors ligne · 2026</span>
+  </div>
+</div>
+
+<script>
+  function r(n, decimals = 0) {
+    const factor = Math.pow(10, decimals);
+    return Math.round(n * factor) / factor;
+  }
+
+  function updateRecipe(n) {
+    n = parseInt(n);
+    document.getElementById('patonVal').textContent = n;
+    const base = n / 6;
+
+    const totalFarine = r(1000 * base);
+    const bigaFarine = r(750 * base);
+    const totalEau = r(700 * base);
+    const bigaEau = r(337.5 * base);
+    const rafEau = r((700 - 337.5) * base);
+    const rafFarine = r(250 * base);
+    const levure = r(0.75 * base, 2);
+    const sel = r(25 * base);
+    const huile = r(20 * base);
+    const poidsTotal = n * 280;
+
+    document.getElementById('bigaFarine').textContent = bigaFarine;
+    document.getElementById('bigaEau').textContent = bigaEau;
+    document.getElementById('bigaLevure').textContent = levure;
+    document.getElementById('rafFarine').textContent = rafFarine;
+    document.getElementById('rafEau').textContent = rafEau;
+    document.getElementById('rafSel').textContent = sel;
+    document.getElementById('rafHuile').textContent = huile;
+
+    document.getElementById('rFarine').textContent = totalFarine + 'g';
+    document.getElementById('rPoids').textContent = poidsTotal + 'g';
+    document.getElementById('rPaizze').textContent = n;
+
+    document.getElementById('recap_patons').textContent = n;
+    document.getElementById('tot_farine').textContent = totalFarine;
+    document.getElementById('tot_eau').textContent = totalEau;
+    document.getElementById('tot_levure').textContent = levure;
+    document.getElementById('tot_sel').textContent = sel;
+    document.getElementById('tot_huile').textContent = huile;
+  }
+
+  function toggle(btn) {
+    const content = btn.nextElementSibling;
+    const arrow = btn.querySelector('.arrow');
+    const isOpen = content.classList.contains('open');
+    content.classList.toggle('open', !isOpen);
+    arrow.classList.toggle('open', !isOpen);
+  }
+
+  // Open first step by default
+  document.querySelectorAll('.collapsible-toggle').forEach((btn, i) => {
+    if (i === 0) {
+      btn.nextElementSibling.classList.add('open');
+      btn.querySelector('.arrow').classList.add('open');
+    }
+  });
+
+  // Register service worker for offline
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  }
+</script>
+
+</body>
+</html>
