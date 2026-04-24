@@ -19,20 +19,18 @@
 
 <style>
   :root {
-    /* Couleurs Greenweez */
-    --green-800: #20614D;      /* vert institutionnel */
+    --green-800: #20614D;
     --green-700: #287960;
     --green-200: #A9E3D1;
     --green-50:  #EAF8F4;
-    --pop-conifer: #CCFF6C;    /* vert pop d'accent */
-    --brown-100: #FAEAD5;      /* fond beige chaud */
+    --pop-conifer: #CCFF6C;
+    --brown-100: #FAEAD5;
     --white: #FFFFFF;
-    --gray-800: #262422;       /* texte principal */
+    --gray-800: #262422;
     --gray-600: #5F5B56;
     --gray-400: #B8B3AC;
     --gray-200: #E6E3DE;
     --gray-50:  #FAF9F7;
-    --secondary-700: #C0510A;  /* accent chaud */
     --red-accent: #D5372B;
   }
 
@@ -54,7 +52,6 @@
     font-family: 'Poppins', sans-serif;
   }
 
-  /* --- HERO --- */
   .hero {
     background: var(--green-800);
     padding: 40px 20px 80px;
@@ -63,7 +60,6 @@
     overflow: hidden;
   }
 
-  /* Forme organique Greenweez en arrière-plan */
   .hero svg.organic {
     position: absolute;
     top: -40px; right: -80px;
@@ -123,7 +119,6 @@
     letter-spacing: 0.3px;
   }
 
-  /* --- CONTAINER (pulled up over hero) --- */
   .container {
     padding: 0 16px 32px;
     max-width: 480px;
@@ -132,7 +127,6 @@
     z-index: 2;
   }
 
-  /* --- CARDS --- */
   .card {
     background: var(--white);
     border-radius: 20px;
@@ -155,7 +149,6 @@
     margin-bottom: 16px;
   }
 
-  /* --- SLIDER --- */
   .slider-row {
     display: flex;
     align-items: center;
@@ -205,7 +198,6 @@
     text-align: right;
   }
 
-  /* --- RECAP --- */
   .recap-card {
     background: var(--pop-conifer);
     border-radius: 20px;
@@ -249,7 +241,6 @@
     font-family: 'Poppins', sans-serif;
   }
 
-  /* --- TIMELINE --- */
   .timeline {
     position: relative;
     padding-left: 26px;
@@ -364,7 +355,7 @@
     transition: max-height 0.4s ease;
   }
 
-  .collapsible-content.open { max-height: 900px; }
+  .collapsible-content.open { max-height: 1400px; }
 
   .ingredients-list {
     list-style: none;
@@ -400,6 +391,28 @@
 
   .step-desc strong { color: var(--green-800); font-weight: 700; }
 
+  .step-sublist {
+    list-style: none;
+    margin-top: 8px;
+    padding-left: 4px;
+  }
+
+  .step-sublist li {
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--gray-800);
+    padding: 4px 0 4px 20px;
+    position: relative;
+  }
+
+  .step-sublist li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--green-800);
+    font-weight: 700;
+  }
+
   .tip-box {
     background: var(--green-50);
     border-left: 3px solid var(--pop-conifer);
@@ -422,7 +435,6 @@
     font-weight: 700;
   }
 
-  /* --- DIVIDER --- */
   .divider {
     height: 1px;
     background: var(--green-200);
@@ -430,7 +442,6 @@
     border: none;
   }
 
-  /* --- TOTAL RECAP --- */
   .total-card {
     background: var(--green-800);
     color: var(--white);
@@ -461,22 +472,54 @@
 
   .total-card .tip-box strong { color: var(--pop-conifer); }
 
-  /* --- FOOTER --- */
+  /* Astuces card - fond beige chaud */
+  .tips-card {
+    background: var(--brown-100);
+    border: 2px solid var(--green-800);
+    border-radius: 20px;
+    padding: 22px;
+    margin-bottom: 20px;
+  }
+
+  .tip-item {
+    display: flex;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px dashed var(--green-200);
+  }
+
+  .tip-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .tip-item:first-of-type { padding-top: 8px; }
+
+  .tip-icon {
+    width: 28px; height: 28px;
+    background: var(--pop-conifer);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+    color: var(--green-800);
+    font-weight: 800;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .tip-text {
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--gray-800);
+  }
+
+  .tip-text strong {
+    color: var(--green-800);
+    font-weight: 700;
+  }
+
   .footer {
     text-align: center;
     padding: 20px;
     font-size: 11px;
     color: var(--gray-600);
     line-height: 1.6;
-  }
-
-  .footer .bee {
-    display: inline-block;
-    width: 28px; height: 28px;
-    background: var(--pop-conifer);
-    border-radius: 50%;
-    line-height: 28px;
-    margin-bottom: 8px;
   }
 
   @keyframes fadeInUp {
@@ -489,17 +532,14 @@
 </head>
 <body>
 
-<!-- HERO -->
 <div class="hero">
-  <!-- Forme organique Greenweez -->
   <svg class="organic" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-    <path d="M 40 80 Q 20 40 60 30 Q 100 20 120 50 Q 140 80 110 100 Q 80 120 90 150 Q 100 180 140 170 Q 180 160 170 120" 
+    <path d="M 40 80 Q 20 40 60 30 Q 100 20 120 50 Q 140 80 110 100 Q 80 120 90 150 Q 100 180 140 170 Q 180 160 170 120"
           stroke="#CCFF6C" stroke-width="28" fill="none" stroke-linecap="round"/>
   </svg>
 
   <div class="hero-inner">
     <div class="logo-icon">
-      <!-- Part de pizza SVG -->
       <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
         <path d="M 96 140 Q 256 100 416 140 L 280 440 Q 256 460 232 440 Z"
               fill="#FAEAD5" stroke="#20614D" stroke-width="16" stroke-linejoin="round"/>
@@ -566,65 +606,61 @@
       <div class="step-card">
         <button class="collapsible-toggle" onclick="toggle(this)">
           <div class="step-num">1</div>
-          <div class="step-title">Préparer la Biga (pré-ferment)</div>
-          <span class="step-time">30 min + 18h</span>
+          <div class="step-title">Préparer la Biga</div>
+          <span class="step-time">18h à 18°C</span>
           <span class="arrow">▶</span>
         </button>
         <div class="collapsible-content">
           <ul class="ingredients-list">
-            <li><span class="ing-name">Farine (T00 ou W300+)</span><span class="ing-qty"><span id="bigaFarine">750</span>g</span></li>
-            <li><span class="ing-name">Eau froide (≈18°C)</span><span class="ing-qty"><span id="bigaEau">338</span>g</span></li>
-            <li><span class="ing-name">Levure fraîche</span><span class="ing-qty"><span id="bigaLevure">0.75</span>g</span></li>
+            <li><span class="ing-name">Farine de force (T00 / W300+)</span><span class="ing-qty"><span id="bigaFarine">750</span>g</span></li>
+            <li><span class="ing-name">Eau (50% d'hydratation)</span><span class="ing-qty"><span id="bigaEau">375</span>ml</span></li>
+            <li><span class="ing-name">Levure fraîche</span><span class="ing-qty"><span id="bigaLevure">3</span>g</span></li>
           </ul>
-          <p class="step-desc">Mélangez la farine, l'eau froide et la levure sans trop pétrir — la Biga doit rester grumeleuse, pas lisse. C'est normal !</p>
+          <p class="step-desc"><strong>Mélanger sans pétrir</strong> — la Biga doit rester grumeleuse, pas lisse. C'est normal.</p>
           <div class="tip-box">
-            <strong>Conseil</strong>
-            La Biga doit juste être amalgamée. Une texture grossière est signe de réussite. L'eau doit être froide pour ralentir la fermentation.
+            <strong>Repos — 2 options</strong>
+            • 18h à 18°C (température ambiante fraîche)<br>
+            • 24h à 48h au réfrigérateur (meilleure complexité aromatique)
           </div>
-          <p class="step-desc">Couvrez d'un film alimentaire et laissez fermenter à température ambiante (16–18°C idéalement) pendant <strong>16 à 18 heures</strong>.</p>
         </div>
       </div>
     </div>
 
     <!-- JOUR 2 -->
     <div class="day-block">
-      <div class="day-label">Jour 2 — Rafraîchi & Boulage</div>
+      <div class="day-label">Jour 2 — L'Empâtement</div>
 
       <div class="step-card">
         <button class="collapsible-toggle" onclick="toggle(this)">
           <div class="step-num">2</div>
-          <div class="step-title">Préparer le rafraîchi</div>
-          <span class="step-time">15 min</span>
+          <div class="step-title">Réhydrater la Biga</div>
+          <span class="step-time">5 min</span>
           <span class="arrow">▶</span>
         </button>
         <div class="collapsible-content">
           <ul class="ingredients-list">
-            <li><span class="ing-name">Farine restante (T00)</span><span class="ing-qty"><span id="rafFarine">250</span>g</span></li>
-            <li><span class="ing-name">Eau tiède (24–26°C)</span><span class="ing-qty"><span id="rafEau">362</span>g</span></li>
-            <li><span class="ing-name">Sel fin</span><span class="ing-qty"><span id="rafSel">25</span>g</span></li>
-            <li><span class="ing-name">Huile d'olive (optionnel)</span><span class="ing-qty"><span id="rafHuile">20</span>g</span></li>
+            <li><span class="ing-name">Eau fraîche (1ère partie)</span><span class="ing-qty"><span id="rehydrEau">175</span>ml</span></li>
           </ul>
-          <p class="step-desc">Diluez la Biga fermentée dans l'eau tiède en déchirant des morceaux. Mélangez jusqu'à dissolution partielle. Ajoutez la farine restante et le sel.</p>
-          <div class="tip-box">
-            <strong>Attention</strong>
-            N'ajoutez jamais le sel directement sur la levure. Incorporez le sel après avoir commencé à mélanger la farine.
-          </div>
+          <p class="step-desc">Verser cette eau sur la Biga pour commencer à la détremper. Cela facilite l'incorporation de la farine qui va suivre.</p>
         </div>
       </div>
 
       <div class="step-card">
         <button class="collapsible-toggle" onclick="toggle(this)">
           <div class="step-num">3</div>
-          <div class="step-title">Pétrissage</div>
-          <span class="step-time">15–20 min</span>
+          <div class="step-title">Pétrissage — 1ère vitesse</div>
+          <span class="step-time">5–8 min</span>
           <span class="arrow">▶</span>
         </button>
         <div class="collapsible-content">
-          <p class="step-desc">Pétrissez énergiquement à la main ou au robot (crochet) pendant 15 à 20 min jusqu'à obtenir une pâte <strong>lisse, élastique et non collante</strong>.</p>
-          <p class="step-desc">Test du voile : étirez doucement un morceau entre vos doigts. Si la pâte s'étire sans se déchirer et laisse passer la lumière, c'est parfait.</p>
+          <ul class="ingredients-list">
+            <li><span class="ing-name">Farine (T00)</span><span class="ing-qty"><span id="rafFarine">250</span>g</span></li>
+            <li><span class="ing-name">Levure fraîche <em style="opacity:0.6">(optionnel)</em></span><span class="ing-qty"><span id="rafLevure">1</span>g</span></li>
+          </ul>
+          <p class="step-desc">Ajouter la farine (et la levure si utilisée) à la Biga réhydratée. <strong>Mixer en 1ère vitesse</strong> jusqu'à obtenir un résultat homogène.</p>
           <div class="tip-box">
-            <strong>Technique</strong>
-            À la main : utilisez la technique du "slap & fold" — claquez la pâte sur le plan de travail, repliez-la sur elle-même, tournez de 90° et recommencez.
+            <strong>Levure optionnelle</strong>
+            Si votre Biga a bien fermenté (bulles visibles, odeur développée), vous pouvez vous en passer. Elle sert de filet de sécurité.
           </div>
         </div>
       </div>
@@ -632,15 +668,25 @@
       <div class="step-card">
         <button class="collapsible-toggle" onclick="toggle(this)">
           <div class="step-num">4</div>
-          <div class="step-title">Pointage (1ère pousse)</div>
-          <span class="step-time">1h à T°A</span>
+          <div class="step-title">Pétrissage — 2ème vitesse & Bassinage</div>
+          <span class="step-time">10–15 min</span>
           <span class="arrow">▶</span>
         </button>
         <div class="collapsible-content">
-          <p class="step-desc">Formez une boule, placez dans un saladier légèrement huilé. Couvrez d'un film étirable. Laissez reposer <strong>1 heure à température ambiante</strong>.</p>
+          <ul class="ingredients-list">
+            <li><span class="ing-name">Eau (2ème partie — bassinage)</span><span class="ing-qty"><span id="bassinageEau">150</span>ml</span></li>
+            <li><span class="ing-name">Sel fin</span><span class="ing-qty"><span id="bassinageSel">27</span>g</span></li>
+            <li><span class="ing-name">Huile d'olive</span><span class="ing-qty"><span id="bassinageHuile">10</span>g</span></li>
+          </ul>
+          <p class="step-desc"><strong>Passer en 2ème vitesse</strong>. Incorporer progressivement :</p>
+          <ul class="step-sublist">
+            <li>L'eau de bassinage, petit à petit (attendre que chaque ajout soit absorbé)</li>
+            <li>Vers la fin du bassinage : le sel</li>
+            <li>Puis l'huile d'olive</li>
+          </ul>
           <div class="tip-box">
-            <strong>Conseil</strong>
-            La pâte doit doubler de volume. Si votre cuisine est fraîche, prolongez légèrement.
+            <strong>⚠️ Température</strong>
+            La pâte ne doit JAMAIS dépasser 24°C. Au besoin, faites des pauses, utilisez de l'eau bien fraîche, ou glacez votre bol.
           </div>
         </div>
       </div>
@@ -648,17 +694,33 @@
       <div class="step-card">
         <button class="collapsible-toggle" onclick="toggle(this)">
           <div class="step-num">5</div>
-          <div class="step-title">Boulage & Appretto (2ème pousse)</div>
-          <span class="step-time">4–6h ou 24h frigo</span>
+          <div class="step-title">Repos & Boulage</div>
+          <span class="step-time">15 min + boulage</span>
           <span class="arrow">▶</span>
         </button>
         <div class="collapsible-content">
-          <p class="step-desc">Divisez la pâte en pâtons de <strong>280g</strong>. Boulez chaque pâton en une sphère tendue : rabattez les bords vers le dessous et faites pivoter sur le plan de travail pour créer de la tension.</p>
-          <p class="step-desc">Placez les pâtons dans des boîtes de fermentation légèrement huilées, espacés. Fermeture hermétique.</p>
+          <p class="step-desc">Laisser reposer la pâte <strong>15 minutes après pétrissage</strong> avant de procéder au boulage.</p>
+          <p class="step-desc">Diviser en pâtons de <strong>280g</strong>. Bouler chaque pâton en une sphère tendue : rabattre les bords vers le dessous et faire pivoter sur le plan de travail pour créer de la tension.</p>
+          <p class="step-desc">Placer les pâtons dans des boîtes de fermentation légèrement huilées, bien espacés. Fermeture hermétique.</p>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <button class="collapsible-toggle" onclick="toggle(this)">
+          <div class="step-num">6</div>
+          <div class="step-title">Maturation finale</div>
+          <span class="step-time">3h / 24h frigo</span>
+          <span class="arrow">▶</span>
+        </button>
+        <div class="collapsible-content">
+          <p class="step-desc">Deux options selon votre emploi du temps :</p>
           <div class="tip-box">
-            <strong>Options</strong>
-            • Tempéré : 4 à 6h à température ambiante avant utilisation<br>
-            • Froid : 24h au réfrigérateur (meilleure saveur), puis 2h à T°A avant d'étaler
+            <strong>🔥 Version rapide — T°A</strong>
+            S'utilise dès <strong>3h de repos à température ambiante</strong>, et jusqu'à <strong>5–6h</strong> pour un résultat <em>super explosif</em> à la cuisson.
+          </div>
+          <div class="tip-box">
+            <strong>❄️ Version longue — Frigo</strong>
+            <strong>24h intégralement au réfrigérateur</strong>. Pensez à sortir les pâtons <strong>30 min avant</strong> de les travailler.
           </div>
         </div>
       </div>
@@ -670,35 +732,67 @@
 
       <div class="step-card">
         <button class="collapsible-toggle" onclick="toggle(this)">
-          <div class="step-num">6</div>
+          <div class="step-num">7</div>
           <div class="step-title">Étaler & Garnir</div>
           <span class="step-time">5 min / pizza</span>
           <span class="arrow">▶</span>
         </button>
         <div class="collapsible-content">
-          <p class="step-desc"><strong>Jamais de rouleau !</strong> Étalez à la main sur plan fariné : pressez doucement du centre vers les bords pour chasser l'air. Soulevez et étirez délicatement par gravité.</p>
+          <p class="step-desc"><strong>Jamais de rouleau !</strong> Étaler à la main sur plan fariné : presser doucement du centre vers les bords pour chasser l'air. Soulever et étirer délicatement par gravité.</p>
           <div class="tip-box">
-            <strong>Le bord</strong>
-            Laissez 2–3 cm de bord (cornicione) sans appuyer — l'air piégé lui donnera ce gonflement caractéristique napolitain.
+            <strong>Le cornicione</strong>
+            Laisser 2–3 cm de bord sans appuyer — l'air piégé lui donnera ce gonflement caractéristique napolitain.
           </div>
         </div>
       </div>
 
       <div class="step-card">
         <button class="collapsible-toggle" onclick="toggle(this)">
-          <div class="step-num">7</div>
+          <div class="step-num">8</div>
           <div class="step-title">Cuisson</div>
           <span class="step-time">60–90s / 6–8 min</span>
           <span class="arrow">▶</span>
         </button>
         <div class="collapsible-content">
-          <p class="step-desc"><strong>Four à pizza :</strong> 450–500°C, 60 à 90 secondes. Tournez la pizza à mi-cuisson.</p>
-          <p class="step-desc"><strong>Four domestique :</strong> Préchauffez au maximum (250–280°C) avec une pierre à pizza ou une plaque retournée. Cuisson 6 à 8 min.</p>
+          <p class="step-desc"><strong>Four à pizza :</strong> 450–500°C, 60 à 90 secondes. Tourner la pizza à mi-cuisson.</p>
+          <p class="step-desc"><strong>Four domestique :</strong> Préchauffer au maximum (250–280°C) avec une pierre à pizza ou une plaque retournée. Cuisson 6 à 8 min.</p>
           <div class="tip-box">
             <strong>Pro tip</strong>
-            Préchauffez votre pierre au moins 45 min. Une plaque en acier (baking steel) donne d'excellents résultats à la maison.
+            Préchauffer la pierre au moins 45 min. Une plaque en acier (baking steel) donne d'excellents résultats à la maison.
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ASTUCES & CONSEILS -->
+  <div class="tips-card">
+    <div class="section-title">Astuces & Conseils</div>
+    <div class="section-sub">Les 3 règles d'or pour réussir</div>
+
+    <div class="tip-item">
+      <div class="tip-icon">1</div>
+      <div class="tip-text">
+        <strong>Farine de force de qualité</strong><br>
+        Privilégiez une farine de force (W300 minimum, idéalement W350+), <strong>surtout pour la Biga</strong>. Une farine faible ne tiendra pas la longue fermentation.
+      </div>
+    </div>
+
+    <div class="tip-item">
+      <div class="tip-icon">2</div>
+      <div class="tip-text">
+        <strong>Première fois ? Réduisez l'hydratation</strong><br>
+        Si c'est votre premier essai, passez à <strong>65% d'hydratation</strong> plutôt que 70%. La pâte sera plus facile à manipuler, le temps de prendre vos marques.
+      </div>
+    </div>
+
+    <div class="tip-item">
+      <div class="tip-icon">3</div>
+      <div class="tip-text">
+        <strong>La pâte ne dépasse JAMAIS 24°C</strong><br>
+        C'est LA règle absolue. Au-delà, la fermentation s'emballe, le gluten se dégrade. Utilisez de l'eau fraîche, un bol froid, et faites des pauses si besoin pendant le pétrissage.
       </div>
     </div>
   </div>
@@ -710,15 +804,15 @@
     <div class="section-title">Total ingrédients</div>
     <div class="section-sub">Pour <span id="recap_patons">6</span> pâtons</div>
     <ul class="ingredients-list">
-      <li><span class="ing-name">Farine totale (T00 / W300)</span><span class="ing-qty"><span id="tot_farine">1000</span>g</span></li>
-      <li><span class="ing-name">Eau totale</span><span class="ing-qty"><span id="tot_eau">700</span>g</span></li>
-      <li><span class="ing-name">Levure fraîche</span><span class="ing-qty"><span id="tot_levure">0.75</span>g</span></li>
-      <li><span class="ing-name">Sel fin</span><span class="ing-qty"><span id="tot_sel">25</span>g</span></li>
-      <li><span class="ing-name">Huile d'olive</span><span class="ing-qty"><span id="tot_huile">20</span>g</span></li>
+      <li><span class="ing-name">Farine totale (T00 / W300+)</span><span class="ing-qty"><span id="tot_farine">1000</span>g</span></li>
+      <li><span class="ing-name">Eau totale</span><span class="ing-qty"><span id="tot_eau">700</span>ml</span></li>
+      <li><span class="ing-name">Levure fraîche (Biga + rafraîchi)</span><span class="ing-qty"><span id="tot_levure">4</span>g</span></li>
+      <li><span class="ing-name">Sel fin</span><span class="ing-qty"><span id="tot_sel">27</span>g</span></li>
+      <li><span class="ing-name">Huile d'olive</span><span class="ing-qty"><span id="tot_huile">10</span>g</span></li>
     </ul>
     <div class="tip-box">
       <strong>Ratios de référence (pour 1kg farine)</strong>
-      Hydratation 70% · Biga 75% · Sel 2.5% · Levure 0.075%
+      Hydratation 70% · Biga 75% · Sel 2.7% · Levure totale 0.4%
     </div>
   </div>
 
@@ -740,24 +834,39 @@
     document.getElementById('patonVal').textContent = n;
     const base = n / 6;
 
+    // Farine
     const totalFarine = r(1000 * base);
     const bigaFarine = r(750 * base);
-    const totalEau = r(700 * base);
-    const bigaEau = r(337.5 * base);
-    const rafEau = r((700 - 337.5) * base);
     const rafFarine = r(250 * base);
-    const levure = r(0.75 * base, 2);
-    const sel = r(25 * base);
-    const huile = r(20 * base);
+
+    // Eau
+    const bigaEau = r(375 * base);       // 50% de 750
+    const rehydrEau = r(175 * base);     // 1ère eau
+    const bassinageEau = r(150 * base);  // 2ème eau
+    const totalEau = r((375 + 175 + 150) * base);  // = 700 * base
+
+    // Levure
+    const bigaLevure = r(3 * base, 1);
+    const rafLevure = r(1 * base, 1);
+    const totalLevure = r(4 * base, 1);
+
+    // Sel & huile
+    const sel = r(27 * base);
+    const huile = r(10 * base);
+
+    // Poids total
     const poidsTotal = n * 280;
 
+    // Update tous les éléments
     document.getElementById('bigaFarine').textContent = bigaFarine;
     document.getElementById('bigaEau').textContent = bigaEau;
-    document.getElementById('bigaLevure').textContent = levure;
+    document.getElementById('bigaLevure').textContent = bigaLevure;
+    document.getElementById('rehydrEau').textContent = rehydrEau;
     document.getElementById('rafFarine').textContent = rafFarine;
-    document.getElementById('rafEau').textContent = rafEau;
-    document.getElementById('rafSel').textContent = sel;
-    document.getElementById('rafHuile').textContent = huile;
+    document.getElementById('rafLevure').textContent = rafLevure;
+    document.getElementById('bassinageEau').textContent = bassinageEau;
+    document.getElementById('bassinageSel').textContent = sel;
+    document.getElementById('bassinageHuile').textContent = huile;
 
     document.getElementById('rFarine').textContent = totalFarine + 'g';
     document.getElementById('rPoids').textContent = poidsTotal + 'g';
@@ -766,7 +875,7 @@
     document.getElementById('recap_patons').textContent = n;
     document.getElementById('tot_farine').textContent = totalFarine;
     document.getElementById('tot_eau').textContent = totalEau;
-    document.getElementById('tot_levure').textContent = levure;
+    document.getElementById('tot_levure').textContent = totalLevure;
     document.getElementById('tot_sel').textContent = sel;
     document.getElementById('tot_huile').textContent = huile;
   }
@@ -779,7 +888,6 @@
     arrow.classList.toggle('open', !isOpen);
   }
 
-  // Open first step by default
   document.querySelectorAll('.collapsible-toggle').forEach((btn, i) => {
     if (i === 0) {
       btn.nextElementSibling.classList.add('open');
@@ -787,7 +895,6 @@
     }
   });
 
-  // Register service worker for offline
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js').catch(() => {});
   }
